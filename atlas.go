@@ -15,14 +15,7 @@ type Atlas struct {
 // the size of each frame on the spritesheet. left and top define the offset from
 // the top left corner if there is padding around the outside of the spritesheet.
 // border defines the amount of pixels inbetween frames.
-// This method wil return an error if it has trouble loading the image at the
-// specified path.
-func NewAtlas(path string, frameWidth, frameHeight, left, top, border int32) (*Atlas, error) {
-	sheet, err := gfx.NewImage(path)
-	if err != nil {
-		return nil, err
-	}
-
+func NewAtlas(sheet *gfx.Image, frameWidth, frameHeight, left, top, border int32) *Atlas {
 	sheetWidth, sheetHeight := sheet.Width, sheet.Height
 	framesHorizontal := int32(float32(sheetWidth) / float32(frameWidth))
 	framesVertical := int32(float32(sheetHeight) / float32(frameHeight))
@@ -43,7 +36,7 @@ func NewAtlas(path string, frameWidth, frameHeight, left, top, border int32) (*A
 		}
 	}
 
-	return atlas, nil
+	return atlas
 }
 
 // NewAnimation will create and return a new animation using this atlas as reference.

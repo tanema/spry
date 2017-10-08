@@ -61,6 +61,14 @@ func (atlas *Atlas) NewAnimation(frames []int, duration float32, looping bool) *
 	}
 }
 
+// GetFrame will return a single frame for drawing
+func (atlas *Atlas) GetFrame(index int) *Animation {
+	return &Animation{
+		atlas:  atlas,
+		frames: []int{index},
+	}
+}
+
 // Draw will draw the frame at the index supplied. the provided arguments fit the
 // amore draw interface.
 func (atlas *Atlas) Draw(index int, args ...float32) {

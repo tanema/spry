@@ -65,7 +65,13 @@ func (anim *Animation) Update(dt float32) {
 	anim.timer = anim.timer + dt
 	loops := int(anim.timer / anim.duration)
 	if loops != 0 {
-		anim.timer = anim.timer - anim.duration*float32(loops)
+		if anim.looping {
+			anim.timer = anim.timer - anim.duration*float32(loops)
+		} else {
+			anim.playing = false
+			anim.position = len(anim.frames) - 1
+			return
+		}
 	}
 
 	anim.position = int(float32(len(anim.frames)) * (anim.timer / anim.duration))

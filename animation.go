@@ -30,6 +30,11 @@ func (anim *Animation) Pause() {
 	anim.playing = false
 }
 
+// IsPlaying will return if the animation is currently animating
+func (anim *Animation) IsPlaying() bool {
+	return anim.playing
+}
+
 // Resume will make the animation continue if it was paused
 func (anim *Animation) Resume() {
 	anim.playing = true

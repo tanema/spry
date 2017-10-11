@@ -1,0 +1,5 @@
+width = 100     # The window width (number)
+height = 100    # The window height (number)
+vsync = true    # Enable vertical sync (boolean)
+centered = true # Center the window in the display
+

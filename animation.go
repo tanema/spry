@@ -48,15 +48,13 @@ func (anim *Animation) GotoFrame(position int) {
 
 // PauseAtEnd will forward the animation to the end and pause it
 func (anim *Animation) PauseAtEnd() {
-	anim.position = len(anim.frames) - 1
-	anim.timer = anim.duration
+	anim.GotoFrame(len(anim.frames) - 1)
 	anim.Pause()
 }
 
 // PauseAtStart will return to the beginnign of the animation and pause it.
 func (anim *Animation) PauseAtStart() {
-	anim.position = 1
-	anim.timer = 0
+	anim.GotoFrame(0)
 	anim.Pause()
 }
 
@@ -73,13 +71,12 @@ func (anim *Animation) Update(dt float32) {
 		if anim.looping {
 			anim.timer = anim.timer - anim.duration*float32(loops)
 		} else {
-			anim.playing = false
-			anim.position = len(anim.frames) - 1
+			anim.PauseAtEnd()
 			return
 		}
 	}
 
-	anim.position = int(float32(len(anim.frames)) * (anim.timer / anim.duration))
+	anim.position = int(float32(len(anim.frames)-1) * (anim.timer / anim.duration))
 }
 
 // Draw will draw the current frame of the animation to the screen. The arguments
